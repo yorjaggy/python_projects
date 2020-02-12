@@ -55,9 +55,34 @@ def request_by_id(id):
     return User.query.filter_by(id=id, isactive = True).first()
 
 def update(id, data):
-    return False, "Pending implementation"
+    user = User.query.filter_by(id=id).first()
+
+    if not user:
+        return False, 'User does not exists. Please create it previos to update it.'
+    else:
+        user.id_national = data['id_national'],
+        user.name = data['name'],
+        user.username = data['username'],
+        user.email = data['email'],
+        user.career = data['career'],
+        user.phonenumber = data['phonenumber'],
+        user.birthdate = data['birthdate'],
+        user.isactive = user.isactive if data.get('isactive') == None else data.get('isactive')
+        user.updated_on = datetime.datetime.now()
+        
+        db.session.commit()
+
+        return True, 'Successfully updated.'
 
 
 def delete(id):
-    return False, "Pending implementation"
+    user = User.query.filter_by(id=id, isactive = True).first()
+    if not user:
+        return False, 'User does not exist. Please create it previos to update it.'
+    else:
+        user.isactive = False
+        user.updated_on = datetime.datetime.now()
+        db.session.commit()
+        return True, 'Successfully deleted.'
+
    

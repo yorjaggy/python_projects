@@ -21,7 +21,15 @@ class User(db.Model):
     @property
     def to_json(self):
         return {
-            "id": int(self.id),
-            "name": self.name,
-            "email": self.email
+            "id" : self.id,
+            "id_national" : self.id_national,
+            "username" : self.username,
+            "name" : self.name,
+            "email" : self.email,
+            "career" : self.career,
+            "birthdate" : self.birthdate,
+            "phonenumber" : self.phonenumber,
+            "created_on" : self.created_on.strftime("%d/%m/%Y, %H:%M:%S"),
+            "updated_on" : self.updated_on.strftime("%d/%m/%Y, %H:%M:%S"),
+            "isactive" : self.isactive
         }
