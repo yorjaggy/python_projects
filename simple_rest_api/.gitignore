@@ -1,0 +1,8 @@
+*.pyc
+migrations/
+__pycache__/
+etc/
+*.jpg
+.vscode
+*.csv
+todo

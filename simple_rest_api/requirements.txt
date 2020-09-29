@@ -1,0 +1,14 @@
+setuptools==45
+bcrypt
+Flask==1.0.2
+Flask-Bcrypt==0.7.1
+Flask-Migrate==2.5.2
+flask-restplus==0.13.0
+Flask-Script==2.0.6
+Flask-SQLAlchemy==2.4.1
+Flask-Testing==0.7.1
+PyJWT
+SQLAlchemy
+PyMySQL
+flask-cors
+Werkzeug==0.16.1

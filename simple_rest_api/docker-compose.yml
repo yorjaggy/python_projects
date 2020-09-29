@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+    flaskapp:
+        build:
+            context: .
+        image: flask_app_academy
+        restart: always
+        ports:
+            - 1080:80
+        environment:
+            SQLALCHEMY_DATABASE_URI: mysql+pymysql://useracad:passacad@mysqldb/dbacad?charset=utf8mb4
+#            SQLALCHEMY_DATABASE_URI: mysql+pymysql://useracad:passacad@academydevops-rds-yorcastano.cwehqapytkz4.us-west-2.rds.amazonaws.com/dbacad?charset=utf8mb4
+
+
+    mysqldb:
+        image: mysql:5.7
+        volumes:
+            - db_data_glo:/var/lib/mysql
+        restart: always
+        ports:
+            - 3306:3306
+        command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+        environment:
+            MYSQL_ROOT_PASSWORD: passacad
+            MYSQL_DATABASE: dbacad
+            MYSQL_USER: useracad
+            MYSQL_PASSWORD: passacad
+            
+
+    phpmyadmin:
+        depends_on:
+            - mysqldb
+        image: phpmyadmin/phpmyadmin
+        restart: always
+        ports:
+            - 8083:80
+        environment:
+            PMA_HOST: mysqldb
+            MYSQL_ROOT_PASSWORD: passacad
+
+volumes:
+    db_data_glo:
+        external: true

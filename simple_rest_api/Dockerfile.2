@@ -1,0 +1,17 @@
+FROM python:3.7-alpine
+RUN addgroup -S worker && adduser -S -G worker worker
+WORKDIR /home/worker
+RUN apk add --no-cache python3-dev openssl-dev libffi-dev gcc musl-dev mariadb-dev && pip3 install --upgrade pip
+COPY --chown=worker:worker requirements.txt requirements.txt
+RUN apk --no-cache add nginx
+
+#USER worker
+RUN pip3 install --user --no-cache-dir -r requirements.txt
+RUN pip3 install --user setuptools==45
+RUN pip3 install --user uwsgi
+
+COPY nginx.conf /etc/nginx
+COPY --chown=worker:worker . .
+RUN chmod +x ./start.sh
+#ENTRYPOINT ["./start.sh"]
+CMD ["top"]
