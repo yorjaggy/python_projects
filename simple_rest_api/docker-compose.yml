@@ -10,7 +10,6 @@ services:
             - 1080:80
         environment:
             SQLALCHEMY_DATABASE_URI: mysql+pymysql://useracad:passacad@mysqldb/dbacad?charset=utf8mb4
-#            SQLALCHEMY_DATABASE_URI: mysql+pymysql://useracad:passacad@academydevops-rds-yorcastano.cwehqapytkz4.us-west-2.rds.amazonaws.com/dbacad?charset=utf8mb4
 
 
     mysqldb:
