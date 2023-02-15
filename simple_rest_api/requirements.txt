@@ -11,4 +11,4 @@ PyJWT
 SQLAlchemy
 PyMySQL
 flask-cors
-Werkzeug==0.16.1
+Werkzeug==2.2.3
